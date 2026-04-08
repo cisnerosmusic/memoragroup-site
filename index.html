@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memora Group — Inteligencia Artificial para Museos y Galerías</title>
+  <meta name="description" content="Consultoría de inteligencia artificial para museos y galerías. Catálogos, textos curatoriales, materiales educativos, difusión.">
+  <meta property="og:title" content="Memora Group">
+  <meta property="og:description" content="Inteligencia artificial al servicio de la memoria cultural.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://memoragroup.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a26;
+      --bg-card-hover: #22222e;
+      --text-primary: #f0ece4;
+      --text-secondary: #a8a4a0;
+      --text-muted: #6b6865;
+      --accent: #c4985a;
+      --accent-dim: rgba(196,152,90,0.15);
+      --accent-hover: #d4a86a;
+      --border: #2a2a35;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+    a:hover { color: var(--accent-hover); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    nav .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .logo {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--text-primary);
+      text-transform: uppercase;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: var(--sans);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+    }
+
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Mobile menu */
+    .menu-toggle {
+      display: none; background: none; border: none;
+      color: var(--text-primary); font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(196,152,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 750px; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 0.9rem 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(196,152,90,0.25);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ===== TAGLINE BAR ===== */
+    .tagline-bar {
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tagline-bar p {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 6rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about h2 {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .about p {
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+    }
+
+    .stat-card .number {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-4px); }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ===== AUDIENCE ===== */
+    .audience {
+      padding: 6rem 0;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .audience-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      transition: all 0.3s;
+    }
+
+    .audience-card:hover { border-color: var(--accent); }
+
+    .audience-card h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+
+    .audience-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ===== PROCESS ===== */
+    .process {
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 50px; height: 50px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .step h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .step p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 6rem 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact h2 {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .contact-detail span { color: var(--accent); }
+
+    form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    input, textarea, select {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.9rem 1.2rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    .btn-submit {
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 0.9rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(10,10,15,0.95);
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .menu-toggle { display: block; }
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== LANGUAGE ===== */
+    [data-lang="en"] { display: none; }
+    html[lang="en"] [data-lang="en"] { display: block; }
+    html[lang="en"] [data-lang="es"] { display: none; }
+    html[lang="en"] [data-lang-inline="en"] { display: inline; }
+    html[lang="en"] [data-lang-inline="es"] { display: none; }
+    html[lang="es"] [data-lang-inline="en"] { display: none; }
+    html[lang="es"] [data-lang-inline="es"] { display: inline; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">MEMORA <span>GROUP</span></a>
+      <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">&#9776;</button>
+      <ul class="nav-links">
+        <li>
+          <a href="#servicios">
+            <span data-lang-inline="es">Servicios</span>
+            <span data-lang-inline="en">Services</span>
+          </a>
+        </li>
+        <li>
+          <a href="#proceso">
+            <span data-lang-inline="es">Proceso</span>
+            <span data-lang-inline="en">Process</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contacto">
+            <span data-lang-inline="es">Contacto</span>
+            <span data-lang-inline="en">Contact</span>
+          </a>
+        </li>
+        <li>
+          <button class="lang-toggle" onclick="toggleLang()">EN</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div data-lang="es">
+        <h1>Inteligencia artificial al servicio de la <em>memoria cultural</em></h1>
+        <p class="hero-sub">Ayudamos a museos y galerías a resolver las tareas que les quitan tiempo: catálogos, textos curatoriales, materiales educativos, difusión.</p>
+        <a href="#contacto" class="hero-cta">Solicitar demostración</a>
+      </div>
+      <div data-lang="en">
+        <h1>Artificial intelligence in service of <em>cultural memory</em></h1>
+        <p class="hero-sub">We help museums and galleries tackle the tasks that consume their time: catalogs, curatorial texts, educational materials, outreach.</p>
+        <a href="#contacto" class="hero-cta">Request a demo</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span data-lang-inline="es">Scroll</span>
+      <span data-lang-inline="en">Scroll</span>
+       &#8595;
+    </div>
+  </section>
+
+  <!-- TAGLINE -->
+  <section class="tagline-bar">
+    <div class="container">
+      <p data-lang="es">&ldquo;El equipo de IA que los museos siempre quisieron tener pero nunca pudieron pagar.&rdquo;</p>
+      <p data-lang="en">&ldquo;The AI team museums always wanted but could never afford.&rdquo;</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div data-lang="es">
+            <h2>Arte, ciencia y tecnología en un solo lugar</h2>
+            <p>Memora Group es una consultora de inteligencia artificial especializada en instituciones culturales. No somos una empresa de tecnología que intenta entender el arte &mdash; somos artistas, educadores y divulgadores que dominan la IA.</p>
+            <p>Combinamos supervisión experta en arte, música, matemáticas y comunicación científica con agentes de IA que realizan el trabajo operativo. El resultado: trabajo profesional, en días en vez de semanas, a una fracción del costo.</p>
+          </div>
+          <div data-lang="en">
+            <h2>Art, science, and technology in one place</h2>
+            <p>Memora Group is an artificial intelligence consultancy specialized in cultural institutions. We&rsquo;re not a tech company trying to understand art &mdash; we&rsquo;re artists, educators, and communicators who master AI.</p>
+            <p>We combine expert oversight in art, music, mathematics, and science communication with AI agents that handle the operational work. The result: professional output, in days instead of weeks, at a fraction of the cost.</p>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="number">4</span>
+            <span class="label" data-lang-inline="es">Agentes IA</span>
+            <span class="label" data-lang-inline="en">AI Agents</span>
+          </div>
+          <div class="stat-card">
+            <span class="number">24h</span>
+            <span class="label" data-lang-inline="es">Respuesta</span>
+            <span class="label" data-lang-inline="en">Response</span>
+          </div>
+          <div class="stat-card">
+            <span class="number">10x</span>
+            <span class="label" data-lang-inline="es">Más rápido</span>
+            <span class="label" data-lang-inline="en">Faster</span>
+          </div>
+          <div class="stat-card">
+            <span class="number">&frac13;</span>
+            <span class="label" data-lang-inline="es">Del costo</span>
+            <span class="label" data-lang-inline="en">Of the cost</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-lang="es">Servicios</h2>
+        <h2 data-lang="en">Services</h2>
+        <p data-lang="es">Todo lo que su institución necesita, resuelto con inteligencia artificial y supervisión experta.</p>
+        <p data-lang="en">Everything your institution needs, powered by artificial intelligence and expert oversight.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">&#9776;</span>
+          <div data-lang="es">
+            <h3>Catálogos digitales</h3>
+            <p>Fichas completas de cada obra: descripción, contexto histórico, datos técnicos. Listos para web o impresión.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Digital catalogs</h3>
+            <p>Complete records for every work: description, historical context, technical data. Ready for web or print.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">&#9998;</span>
+          <div data-lang="es">
+            <h3>Textos curatoriales</h3>
+            <p>Textos de sala, ensayos para exposiciones, notas de prensa. Tono académico o divulgativo, a su elección.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Curatorial writing</h3>
+            <p>Wall texts, exhibition essays, press releases. Academic or accessible tone, your choice.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">&#9670;</span>
+          <div data-lang="es">
+            <h3>Infografías y visuales</h3>
+            <p>Infografías de obras, cronologías visuales, mapas de exposición. Contenido visual que comunica.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Infographics &amp; visuals</h3>
+            <p>Artwork infographics, visual timelines, exhibition maps. Visual content that communicates.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">&#9734;</span>
+          <div data-lang="es">
+            <h3>Contenido para redes</h3>
+            <p>Calendario mensual con 20&ndash;30 publicaciones listas. Texto, hashtags y sugerencias visuales.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Social media content</h3>
+            <p>Monthly calendar with 20&ndash;30 ready-made posts. Text, hashtags, and visual suggestions.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">&#9733;</span>
+          <div data-lang="es">
+            <h3>Materiales educativos</h3>
+            <p>Guías para visitas escolares, fichas didácticas, cuestionarios interactivos. Pedagogía + tecnología.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Educational materials</h3>
+            <p>School visit guides, teaching sheets, interactive quizzes. Pedagogy meets technology.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">&#9881;</span>
+          <div data-lang="es">
+            <h3>Curaduría asistida</h3>
+            <p>Propuestas de agrupación temática, diálogos entre obras, sugerencias de montaje con inteligencia artificial.</p>
+          </div>
+          <div data-lang="en">
+            <h3>AI-assisted curation</h3>
+            <p>Thematic grouping proposals, cross-work dialogues, AI-powered installation suggestions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section class="audience">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-lang="es">Para quién trabajamos</h2>
+        <h2 data-lang="en">Who we work with</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div data-lang="es">
+            <h3>Museos municipales y estatales</h3>
+            <p>Instituciones públicas con colección permanente que necesitan modernizar su comunicación y materiales sin grandes presupuestos tecnológicos.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Municipal &amp; state museums</h3>
+            <p>Public institutions with permanent collections needing to modernize their communications and materials without large tech budgets.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div data-lang="es">
+            <h3>Galerías de arte contemporáneo</h3>
+            <p>Galerías independientes que manejan múltiples artistas y exposiciones con equipos mínimos. Necesitan eficiencia operativa.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Contemporary art galleries</h3>
+            <p>Independent galleries managing multiple artists and exhibitions with minimal staff. They need operational efficiency.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div data-lang="es">
+            <h3>Centros culturales</h3>
+            <p>Fundaciones, casas de cultura y espacios expositivos que organizan talleres y exposiciones pero necesitan mejorar su difusión.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Cultural centers</h3>
+            <p>Foundations, cultural houses, and exhibition spaces organizing workshops and shows but needing better outreach.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div data-lang="es">
+            <h3>Museos universitarios</h3>
+            <p>Museos vinculados a universidades que combinan arte, ciencia y divulgación. Contenido educativo y científico es nuestra especialidad.</p>
+          </div>
+          <div data-lang="en">
+            <h3>University museums</h3>
+            <p>University-linked museums combining art, science, and outreach. Educational and scientific content is our specialty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="proceso">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-lang="es">Cómo trabajamos</h2>
+        <h2 data-lang="en">How we work</h2>
+        <p data-lang="es">Un proceso simple, transparente y rápido.</p>
+        <p data-lang="en">A simple, transparent, and fast process.</p>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div data-lang="es">
+            <h3>Conversación</h3>
+            <p>Nos cuenta qué necesita. Sin compromiso, sin jerga técnica.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Conversation</h3>
+            <p>Tell us what you need. No commitment, no technical jargon.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div data-lang="es">
+            <h3>Demostración</h3>
+            <p>Generamos un ejemplo real con su colección. Gratis.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Demo</h3>
+            <p>We generate a real example using your collection. Free.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div data-lang="es">
+            <h3>Propuesta</h3>
+            <p>Plan claro con alcance, tiempos y precio. Sin sorpresas.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Proposal</h3>
+            <p>Clear plan with scope, timeline, and pricing. No surprises.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div data-lang="es">
+            <h3>Entrega</h3>
+            <p>Resultados profesionales en días, no semanas.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Delivery</h3>
+            <p>Professional results in days, not weeks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div data-lang="es">
+            <h2>Hablemos</h2>
+            <p>¿Su museo o galería necesita modernizarse pero no sabe por dónde empezar? Escríbanos. Le mostraremos en 15 minutos lo que la IA puede hacer con su colección.</p>
+          </div>
+          <div data-lang="en">
+            <h2>Let&rsquo;s talk</h2>
+            <p>Does your museum or gallery need to modernize but you&rsquo;re not sure where to start? Write to us. We&rsquo;ll show you in 15 minutes what AI can do with your collection.</p>
+          </div>
+          <div class="contact-detail">
+            <span>&#9993;</span> contacto@memoragroup.com
+          </div>
+          <div class="contact-detail">
+            <span>&#9741;</span> memoragroup.com
+          </div>
+        </div>
+        <div>
+          <!-- FORMSPREE: Replace YOUR_FORM_ID with your actual Formspree form ID -->
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input type="text" name="name" required>
+            <input type="email" name="email" required>
+            <input type="text" name="institution">
+            <textarea name="message" rows="5"></textarea>
+            <button type="submit" class="btn-submit">
+              <span data-lang-inline="es">Enviar mensaje</span>
+              <span data-lang-inline="en">Send message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Memora Group. <span data-lang-inline="es">Todos los derechos reservados.</span><span data-lang-inline="en">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+  <script>
+    // Language toggle
+    function toggleLang() {
+      const html = document.documentElement;
+      const btn = document.querySelector('.lang-toggle');
+      if (html.lang === 'es') {
+        html.lang = 'en';
+        btn.textContent = 'ES';
+        // Update placeholders
+        setPlaceholders('en');
+      } else {
+        html.lang = 'es';
+        btn.textContent = 'EN';
+        setPlaceholders('es');
+      }
+    }
+
+    function setPlaceholders(lang) {
+      const ph = {
+        es: { name: 'Nombre', email: 'Email', institution: 'Institución (opcional)', message: 'Cuéntenos qué necesita...' },
+        en: { name: 'Name', email: 'Email', institution: 'Institution (optional)', message: 'Tell us what you need...' }
+      };
+      const inputs = document.querySelectorAll('form input, form textarea');
+      inputs[0].placeholder = ph[lang].name;
+      inputs[1].placeholder = ph[lang].email;
+      inputs[2].placeholder = ph[lang].institution;
+      inputs[3].placeholder = ph[lang].message;
+    }
+
+    // Set initial placeholders
+    setPlaceholders('es');
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
