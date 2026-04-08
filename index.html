@@ -249,14 +249,6 @@
       position: relative;
     }
 
-    .divider::before {
-      content: '';
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px; height: 1px;
-      background: var(--accent);
-    }
-
     .divider p {
       font-family: var(--serif);
       font-size: 1.4rem;
@@ -266,7 +258,6 @@
       letter-spacing: 0.01em;
       max-width: 600px;
       margin: 0 auto;
-      padding-top: 2.5rem;
     }
 
     /* ===== SECTIONS COMMON ===== */
@@ -605,7 +596,9 @@
       .contact-grid { grid-template-columns: 1fr; }
       .audience-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
-      .hero { padding: 8rem 1.5rem 4rem; }
+      .hero { padding: 7rem 1.5rem 6rem; min-height: auto; }
+      .hero-cta { margin-bottom: 4rem; }
+      .hero-scroll { position: relative; bottom: auto; left: auto; transform: none; margin-top: 2rem; }
     }
 
     /* ===== LANGUAGE ===== */
@@ -640,13 +633,13 @@
       <div data-lang="es">
         <span class="hero-label">Grupo tecnol&oacute;gico para instituciones culturales</span>
         <h1>Tecnolog&iacute;a de primer orden al servicio de la <em>memoria cultural</em></h1>
-        <p class="hero-sub">Somos especialistas en museos y galer&iacute;as. Resolvemos lo que consume su tiempo &mdash; cat&aacute;logos, textos curatoriales, materiales educativos, difusi&oacute;n &mdash; con precisi&oacute;n y criterio experto.</p>
+        <p class="hero-sub">Somos especialistas en museos y galer&iacute;as. Resolvemos lo que consume su tiempo: cat&aacute;logos, textos curatoriales, materiales educativos y difusi&oacute;n. Con precisi&oacute;n y criterio experto.</p>
         <a href="#contacto" class="hero-cta">Solicitar demostraci&oacute;n</a>
       </div>
       <div data-lang="en">
         <span class="hero-label">Technology group for cultural institutions</span>
         <h1>World-class technology in service of <em>cultural memory</em></h1>
-        <p class="hero-sub">We specialize in museums and galleries. We solve what consumes your time &mdash; catalogs, curatorial texts, educational materials, outreach &mdash; with precision and expert judgment.</p>
+        <p class="hero-sub">We specialize in museums and galleries. We solve what consumes your time: catalogs, curatorial texts, educational materials, and outreach. With precision and expert judgment.</p>
         <a href="#contacto" class="hero-cta">Request a demo</a>
       </div>
     </div>
@@ -675,12 +668,12 @@
           </span>
           <div data-lang="es">
             <h2 class="section-title reveal">Expertos en cultura, potenciados por tecnolog&iacute;a</h2>
-            <p class="reveal">Memora Group nace de la intersecci&oacute;n entre arte, ciencia y tecnolog&iacute;a. No somos una empresa tech que intenta entender el mundo cultural &mdash; somos artistas, educadores y divulgadores que dominan las herramientas m&aacute;s avanzadas del mercado.</p>
+            <p class="reveal"><strong style="color:var(--text)">MEMORA</strong> <strong style="color:var(--accent);font-weight:500">GROUP</strong> nace de la intersecci&oacute;n entre arte, ciencia y tecnolog&iacute;a. Somos un equipo multidisciplinario, dirigido por Ernesto Cisneros (m&uacute;sico, artista visual, matem&aacute;tico y divulgador), que re&uacute;ne expertise en cultura con las herramientas tecnol&oacute;gicas m&aacute;s avanzadas del mercado.</p>
             <p class="reveal">Nuestros agentes especializados en el sector cultural trabajan bajo supervisi&oacute;n experta en arte, m&uacute;sica, matem&aacute;ticas y comunicaci&oacute;n cient&iacute;fica. Cada entrega pasa por ojos que entienden lo que su instituci&oacute;n necesita, no solo lo que la tecnolog&iacute;a puede hacer.</p>
           </div>
           <div data-lang="en">
             <h2 class="section-title reveal">Culture experts, technology-powered</h2>
-            <p class="reveal">Memora Group is born at the intersection of art, science, and technology. We&rsquo;re not a tech company trying to understand the cultural world &mdash; we&rsquo;re artists, educators, and communicators who master the most advanced tools on the market.</p>
+            <p class="reveal"><strong style="color:var(--text)">MEMORA</strong> <strong style="color:var(--accent);font-weight:500">GROUP</strong> is born at the intersection of art, science, and technology. We are a multidisciplinary team, led by Ernesto Cisneros (musician, visual artist, mathematician, and science communicator), bringing together cultural expertise with the most advanced technological tools on the market.</p>
             <p class="reveal">Our agents, specialized in the cultural sector, work under expert oversight in art, music, mathematics, and science communication. Every deliverable passes through eyes that understand what your institution needs, not just what technology can do.</p>
           </div>
         </div>
@@ -743,8 +736,8 @@
           <h2 class="section-title reveal" data-lang="en">Everything your institution needs, in one place</h2>
         </div>
         <div>
-          <p class="section-desc reveal" data-lang="es">Cada servicio combina tecnolog&iacute;a de primer orden con supervisi&oacute;n experta en el sector cultural. No entregamos borradores &mdash; entregamos trabajo terminado.</p>
-          <p class="section-desc reveal" data-lang="en">Every service combines world-class technology with expert oversight in the cultural sector. We don&rsquo;t deliver drafts &mdash; we deliver finished work.</p>
+          <p class="section-desc reveal" data-lang="es">Cada servicio combina tecnolog&iacute;a de primer orden con supervisi&oacute;n experta en el sector cultural. No entregamos borradores; entregamos trabajo terminado.</p>
+          <p class="section-desc reveal" data-lang="en">Every service combines world-class technology with expert oversight in the cultural sector. We don&rsquo;t deliver drafts; we deliver finished work.</p>
         </div>
       </div>
       <div class="services-grid reveal">
@@ -812,6 +805,17 @@
           <div data-lang="en">
             <h3>Assisted curation</h3>
             <p>Thematic grouping proposals, cross-work dialogues, installation suggestions based on advanced analysis.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">07</span>
+          <div data-lang="es">
+            <h3>Registro en blockchain</h3>
+            <p>Certificaci&oacute;n y registro perdurable de obras, colecciones y curadur&iacute;as en blockchain. Procedencia verificable, autenticidad permanente, tecnolog&iacute;a al servicio del patrimonio.</p>
+          </div>
+          <div data-lang="en">
+            <h3>Blockchain registry</h3>
+            <p>Permanent certification and registry of artworks, collections, and curatorial records on blockchain. Verifiable provenance, permanent authenticity, technology serving heritage.</p>
           </div>
         </div>
       </div>
@@ -945,11 +949,11 @@
           </span>
           <div data-lang="es">
             <h2 class="section-title reveal">Hablemos de su instituci&oacute;n</h2>
-            <p class="reveal">Cu&eacute;ntenos qu&eacute; necesita. Le mostraremos en 15 minutos lo que podemos hacer con su colecci&oacute;n, sin costo y sin compromiso.</p>
+            <p class="reveal">Cu&eacute;ntenos qu&eacute; necesita. Le mostraremos en 30 minutos lo que podemos hacer con su colecci&oacute;n, sin costo y sin compromiso.</p>
           </div>
           <div data-lang="en">
             <h2 class="section-title reveal">Let&rsquo;s talk about your institution</h2>
-            <p class="reveal">Tell us what you need. We&rsquo;ll show you in 15 minutes what we can do with your collection, free and with no strings attached.</p>
+            <p class="reveal">Tell us what you need. We&rsquo;ll show you in 30 minutes what we can do with your collection, free and with no strings attached.</p>
           </div>
           <div class="reveal">
             <div class="contact-detail">
@@ -979,7 +983,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Memora Group</p>
+      <p>&copy; 2026 <strong style="color:var(--text-secondary)">MEMORA</strong> <strong style="color:var(--accent);font-weight:500">GROUP</strong></p>
       <p>
         <span data-lang-inline="es">Todos los derechos reservados</span>
         <span data-lang-inline="en">All rights reserved</span>
