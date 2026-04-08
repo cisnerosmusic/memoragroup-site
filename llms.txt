@@ -1,0 +1,31 @@
+# Memora Group
+
+> Grupo tecnológico especializado en instituciones culturales. Tecnología de primer orden al servicio de la memoria cultural.
+
+Memora Group es un grupo tecnológico que ofrece servicios especializados a museos, galerías y espacios culturales. Su equipo multidisciplinario, dirigido por Ernesto Cisneros, combina inteligencia artificial, blockchain y herramientas digitales para potenciar la gestión, difusión y preservación del patrimonio artístico y cultural.
+
+## Servicios
+
+- Catalogación inteligente: Fichas técnicas, metadatos y clasificación de colecciones con tecnología avanzada
+- Textos curatoriales y críticos: Generación de textos expositivos, ensayos críticos y material interpretativo
+- Materiales educativos: Guías didácticas, fichas de sala y recursos pedagógicos para instituciones culturales
+- Difusión y contenido: Estrategias de comunicación, publicaciones digitales y contenido para redes sociales
+- Consultoría digital: Diagnóstico tecnológico, optimización de procesos y estrategia de transformación digital
+- Infografías y visualización: Líneas de tiempo, mapas conceptuales y recursos visuales para exposiciones
+- Registro en blockchain: Certificación de autenticidad, procedencia y trazabilidad de obras y colecciones
+
+## Público objetivo
+
+- Museos pequeños y medianos
+- Galerías de arte
+- Espacios culturales independientes
+- Colecciones privadas
+
+## Ubicación y alcance
+
+Sede en España. Servicios disponibles en español e inglés para instituciones en España y Latinoamérica.
+
+## Contacto
+
+- Web: https://memoragroup.com
+- Email: contacto@memoragroup.com
